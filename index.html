@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADC Fonte do Rei - Club de Fútbol</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #1e3c72, #2a5298);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 36px;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(30, 60, 114, 0.3);
+        }
+
+        .club-name {
+            color: #1e3c72;
+            font-size: 2.8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .club-subtitle {
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 30px;
+        }
+
+        .tab {
+            background: rgba(255, 255, 255, 0.9);
+            color: #1e3c72;
+            border: none;
+            padding: 15px 25px;
+            cursor: pointer;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab:hover {
+            background: #1e3c72;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(30, 60, 114, 0.3);
+        }
+
+        .tab.active {
+            background: #1e3c72;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(30, 60, 114, 0.4);
+        }
+
+        .content-area {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            min-height: 400px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .content-placeholder {
+            text-align: center;
+            color: #666;
+            font-size: 1.2rem;
+            padding: 60px 20px;
+        }
+
+        .content-placeholder i {
+            font-size: 4rem;
+            color: #1e3c72;
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+
+        .edit-note {
+            background: linear-gradient(45deg, #e3f2fd, #f8f9fa);
+            border-left: 4px solid #1e3c72;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 0 10px 10px 0;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .club-name {
+                font-size: 2rem;
+            }
+            
+            .nav-tabs {
+                gap: 3px;
+            }
+            
+            .tab {
+                padding: 12px 18px;
+                font-size: 0.9rem;
+            }
+            
+            .content-area {
+                padding: 25px;
+            }
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">FR</div>
+            <h1 class="club-name">ADC FONTE DO REI</h1>
+            <p class="club-subtitle">Club de Fútbol</p>
+        </header>
+
+        <nav class="nav-tabs">
+            <button class="tab active" onclick="showTab('historia')">Historia</button>
+            <button class="tab" onclick="showTab('patrocinadores')">Patrocinadores</button>
+            <button class="tab" onclick="showTab('metodologia')">Metodología</button>
+            <button class="tab" onclick="showTab('entrenadores')">Entrenadores</button>
+            <button class="tab" onclick="showTab('categoria')">Categoría</button>
+            <button class="tab" onclick="showTab('calendario')">Calendario</button>
+        </nav>
+
+        <main class="content-area">
+            <div id="historia" class="tab-content active">
+                <div class="content-placeholder">
+                    <div style="font-size: 4rem; color: #1e3c72; margin-bottom: 20px; opacity: 0.7;">📖</div>
+                    <h2 style="color: #1e3c72; margin-bottom: 15px;">Historia del Club</h2>
+                    <p>Contenido de la historia del ADC Fonte do Rei...</p>
+                    <div class="edit-note">
+                        💡 <strong>Para editar:</strong> Reemplaza este texto con la historia real del club, fechas importantes, logros y momentos destacados.
+                    </div>
+                </div>
+            </div>
+
+            <div id="patrocinadores" class="tab-content">
+                <div class="content-placeholder">
+                    <div style="font-size: 4rem; color: #1e3c72; margin-bottom: 20px; opacity: 0.7;">🤝</div>
+                    <h2 style="color: #1e3c72; margin-bottom: 15px;">Nuestros Patrocinadores</h2>
+                    <p>Información sobre los patrocinadores del club...</p>
+                    <div class="edit-note">
+                        💡 <strong>Para editar:</strong> Añade logos y información de los patrocinadores, agradecimientos y colaboradores del club.
+                    </div>
+                </div>
+            </div>
+
+            <div id="metodologia" class="tab-content">
+                <div class="content-placeholder">
+                    <div style="font-size: 4rem; color: #1e3c72; margin-bottom: 20px; opacity: 0.7;">⚽</div>
+                    <h2 style="color: #1e3c72; margin-bottom: 15px;">Metodología de Entrenamiento</h2>
+                    <p>Descripción de la metodología y filosofía del club...</p>
+                    <div class="edit-note">
+                        💡 <strong>Para editar:</strong> Describe la filosofía de juego, metodología de entrenamientos, valores del club y enfoque formativo.
+                    </div>
+                </div>
+            </div>
+
+            <div id="entrenadores" class="tab-content">
+                <div class="content-placeholder">
+                    <div style="font-size: 4rem; color: #1e3c72; margin-bottom: 20px; opacity: 0.7;">👥</div>
+                    <h2 style="color: #1e3c72; margin-bottom: 15px;">Cuerpo Técnico</h2>
+                    <p>Información sobre los entrenadores y staff técnico...</p>
+                    <div class="edit-note">
+                        💡 <strong>Para editar:</strong> Añade fotos, biografías y experiencia de los entrenadores, preparadores físicos y demás staff.
+                    </div>
+                </div>
+            </div>
+
+            <div id="categoria" class="tab-content">
+                <div class="content-placeholder">
+                    <div style="font-size: 4rem; color: #1e3c72; margin-bottom: 20px; opacity: 0.7;">🏆</div>
+                    <h2 style="color: #1e3c72; margin-bottom: 15px;">Categorías y Equipos</h2>
+                    <p>Información sobre las diferentes categorías del club...</p>
+                    <div class="edit-note">
+                        💡 <strong>Para editar:</strong> Lista las categorías (infantil, juvenil, senior, etc.), clasificaciones actuales y objetivos por equipo.
+                    </div>
+                </div>
+            </div>
+
+            <div id="calendario" class="tab-content">
+                <div class="content-placeholder">
+                    <div style="font-size: 4rem; color: #1e3c72; margin-bottom: 20px; opacity: 0.7;">📅</div>
+                    <h2 style="color: #1e3c72; margin-bottom: 15px;">Calendario y Resultados</h2>
+                    <p>Próximos partidos y resultados recientes...</p>
+                    <div class="edit-note">
+                        💡 <strong>Para editar:</strong> Añade fechas de partidos, horarios, rivales, resultados y tabla de clasificación actual.
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 ADC Fonte do Rei - Todos los derechos reservados</p>
+        </footer>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Ocultar todas las pestañas
+            const allTabs = document.querySelectorAll('.tab-content');
+            allTabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Remover clase active de todos los botones
+            const allButtons = document.querySelectorAll('.tab');
+            allButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Mostrar la pestaña seleccionada
+            document.getElementById(tabName).classList.add('active');
+            
+            // Activar el botón correspondiente
+            event.target.classList.add('active');
+        }
+
+        // Añadir efectos hover a los elementos
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('mouseenter', function() {
+                    if (!this.classList.contains('active')) {
+                        this.style.transform = 'translateY(-2px)';
+                    }
+                });
+                
+                tab.addEventListener('mouseleave', function() {
+                    if (!this.classList.contains('active')) {
+                        this.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
