@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADC Fonte do Rei - Club de Fútbol</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #1e3c72, #2a5298);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 36px;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(30, 60, 114, 0.3);
+        }
+
+        .club-name {
+            color: #1e3c72;
+            font-size: 2.8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .club-subtitle {
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 30px;
+        }
+
+        .tab {
+            background: rgba(255, 255, 255, 0.9);
+            color: #1e3c72;
+            border: none;
+            padding: 15px 25px;
+            cursor: pointer;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab:hover {
+            background: #1e3c72;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(30, 60, 114, 0.3);
+        }
+
+        .tab.active {
+            background: #1e3c72;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(30, 60, 114, 0.4);
+        }
+
+        .content-area {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            min-height: 400px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .content-placeholder {
+            text-align: center;
+            color: #666;
+            font-size: 1.2rem;
+            padding: 60px 20px;
+        }
+
+        .content-placeholder i {
+            font-size: 4rem;
+            color: #1e3c72;
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+
+        .edit-note {
+            background: linear-gradient(45deg, #e3f2fd, #f8f9fa);
+            border-left: 4px solid #1e3c72;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 0 10px 10px 0;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .club-name {
+                font-size: 2rem;
+            }
+            
+            .nav-tabs {
+                gap: 3px;
+            }
+            
+            .tab {
+                padding: 12px 18px;
+                font-size: 0.9rem;
+            }
+            
+            .content-area {
+                padding: 25px;
+            }
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <img src="logo-adc-fonte-do-rei.png" alt="ADC Fonte do Rei Logo" style="width:120px; height:auto; margin: 0 auto 20px; display:block;">
+            <h1 class="club-name">ADC FONTE DO REI</h1>
+            <p class="club-subtitle">Club de Fútbol</p>
+        </header>
+
+        <nav class="nav-tabs">
+            <button class="tab active" onclick="showTab('historia')">Historia</button>
+            <button class="tab" onclick="showTab('patrocinadores')">Patrocinadores</button>
+            <button class="tab" onclick="showTab('directiva')">Directiva</button>
+            <button class="tab" onclick="showTab('entrenadores')">Entrenadores</button>
+            <button class="tab" onclick="showTab('categorias')">Categorías</button>
+            <button class="tab" onclick="showTab('metodologia')">Metodología</button>
+            <button class="tab" onclick="showTab('calendario')">Calendario</button>
+        </nav>
+
+        <main class="content-area">
+            <div id="historia" class="tab-content active">
+                <div style="padding: 20px 0;">
+                    <div style="font-size: 3rem; color: #1e3c72; margin-bottom: 20px; text-align: center; opacity: 0.8;">📖</div>
+                    <h2 style="color: #1e3c72; margin-bottom: 25px; text-align: center; font-size: 2rem;">Historia del Club</h2>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: #555; text-align: justify;">
+                        El club nace en el año 2014 después de decidir que tanto los colegios CEIP Illa Verde como Menéndez y Pelayo debían tener una continuidad a partir de sexto de primaria. A partir de ahí nace un proyecto por el cual se trata de darle la oportunidad a los chicos de estos y otros colegios de competir sin priorizar la parte competitiva por encima de la lúdica y deportiva.
+                    </p>
+                </div>
+            </div>
+
+            <div id="patrocinadores" class="tab-content">
+                <div style="padding: 20px 0;">
+                    <div style="font-size: 3rem; color: #1e3c72; margin-bottom: 20px; text-align: center; opacity: 0.8;">🤝</div>
+                    <h2 style="color: #1e3c72; margin-bottom: 25px; text-align: center; font-size: 2rem;">Nuestros Patrocinadores</h2>
+                    <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; margin-top: 30px;">
+                        <div style="background: rgba(30, 60, 114, 0.1); padding: 20px; border-radius: 15px; text-align: center; min-width: 200px;">
+                            <h3 style="color: #1e3c72; margin-bottom: 10px;">Aceites Abril</h3>
+                            <a href="https://www.facebook.com/AceitesAbril" target="_blank" style="color: #2a5298; text-decoration: none; font-weight: 600;">
+                                Visitar página →
+                            </a>
+                        </div>
+                        <div style="background: rgba(30, 60, 114, 0.1); padding: 20px; border-radius: 15px; text-align: center; min-width: 200px;">
+                            <h3 style="color: #1e3c72; margin-bottom: 10px;">Mascovet</h3>
+                            <a href="https://www.facebook.com/Mascovet" target="_blank" style="color: #2a5298; text-decoration: none; font-weight: 600;">
+                                Visitar página →
+                            </a>
+                        </div>
+                    </div>
+                    <p style="text-align: center; color: #666; margin-top: 30px; font-style: italic;">
+                        Agradecemos el apoyo de nuestros patrocinadores que hacen posible el desarrollo del club.
+                    </p>
+                </div>
+            </div>
+
+            <div id="directiva" class="tab-content">
+                <div style="padding: 20px 0;">
+                    <div style="font-size: 3rem; color: #1e3c72; margin-bottom: 20px; text-align: center; opacity: 0.8;">👔</div>
+                    <h2 style="color: #1e3c72; margin-bottom: 25px; text-align: center; font-size: 2rem;">Junta Directiva</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 30px;">
+                        <div style="background: rgba(30, 60, 114, 0.1); padding: 25px; border-radius: 15px; text-align: center;">
+                            <h3 style="color: #1e3c72; margin-bottom: 10px; font-size: 1.3rem;">Presidente</h3>
+                            <p style="color: #555; font-weight: 600; font-size: 1.1rem;">Rafael Ferro Parga</p>
+                        </div>
+                        <div style="background: rgba(30, 60, 114, 0.1); padding: 25px; border-radius: 15px; text-align: center;">
+                            <h3 style="color: #1e3c72; margin-bottom: 10px; font-size: 1.3rem;">Secretario</h3>
+                            <p style="color: #555; font-weight: 600; font-size: 1.1rem;">Germán Alonso Barreiro</p>
+                        </div>
+                        <div style="background: rgba(30, 60, 114, 0.1); padding: 25px; border-radius: 15px; text-align: center;">
+                            <h3 style="color: #1e3c72; margin-bottom: 10px; font-size: 1.3rem;">Tesorera</h3>
+                            <p style="color: #555; font-weight: 600; font-size: 1.1rem;">Vanessa Lorenzo Castaño</p>
+                        </div>
+                        <div style="background: rgba(30, 60, 114, 0.1); padding: 25px; border-radius: 15px; text-align: center; grid-column: span 2;">
+                            <h3 style="color: #1e3c72; margin-bottom: 10px; font-size: 1.3rem;">Vocales</h3>
+                            <p style="color: #555; font-weight: 600; font-size: 1.1rem;">Brais López y Vanessa Gómez</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="metodologia" class="tab-content">
+                <div style="padding: 20px 0;">
+                    <div style="font-size: 3rem; color: #1e3c72; margin-bottom: 20px; text-align: center; opacity: 0.8;">⚽</div>
+                    <h2 style="color: #1e3c72; margin-bottom: 25px; text-align: center; font-size: 2rem;">Metodología de Entrenamiento</h2>
+                    <div style="background: rgba(30, 60, 114, 0.05); padding: 30px; border-radius: 15px; border-left: 4px solid #1e3c72;">
+                        <p style="font-size: 1.1rem; line-height: 1.8; color: #555; text-align: justify;">
+                            La metodología de trabajo parte del <strong>descubrimiento guiado</strong>, siendo los propios jugadores los que a partir de diversas situaciones llegan a tener noción de cómo enfrentarse al juego. Si bien esta metodología da sus frutos a largo plazo, contribuye a la creación de <strong>jugadores inteligentes</strong>.
+                        </p>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px;">
+                        <div style="background: rgba(30, 60, 114, 0.1); padding: 25px; border-radius: 15px; text-align: center;">
+                            <h3 style="color: #1e3c72; margin-bottom: 15px;">🧠 Descubrimiento Guiado</h3>
+                            <p style="color: #666; font-size: 0.95rem;">Los jugadores aprenden a través de la experiencia y la resolución de problemas</p>
+                        </div>
+                        <div style="background: rgba(30, 60, 114, 0.1); padding: 25px; border-radius: 15px; text-align: center;">
+                            <h3 style="color: #1e3c72; margin-bottom: 15px;">⏳ Visión a Largo Plazo</h3>
+                            <p style="color: #666; font-size: 0.95rem;">Formación integral que da frutos con el tiempo</p>
+                        </div>
+                        <div style="background: rgba(30, 60, 114, 0.1); padding: 25px; border-radius: 15px; text-align: center;">
+                            <h3 style="color: #1e3c72; margin-bottom: 15px;">💡 Jugadores Inteligentes</h3>
+                            <p style="color: #666; font-size: 0.95rem;">Desarrollo de la toma de decisiones y comprensión del juego</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="entrenadores" class="tab-content">
+                <div style="padding: 20px 0;">
+                    <div style="font-size: 3rem; color: #1e3c72; margin-bottom: 20px; text-align: center; opacity: 0.8;">👥</div>
+                    <h2 style="color: #1e3c72; margin-bottom: 25px; text-align: center; font-size: 2rem;">Cuerpo Técnico</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px;">
+                        <div style="background: rgba(30, 60, 114, 0.1); padding: 20px; border-radius: 15px; text-align: center;">
+                            <h3 style="color: #1e3c72; margin-bottom: 8px;">Rafael Ferro Parga</h3>
+                        </div>
+                        <div style="background: rgba(30, 60, 114, 0.1); padding: 20px; border-radius: 15px; text-align: center;">
+                            <h3 style="color: #1e3c72; margin-bottom: 8px;">Óscar Arias Basadre</h3>
+                        </div>
+                        <div style="background: rgba(30, 60, 114, 0.1); padding: 20px; border-radius: 15px; text-align: center;">
+                            <h3 style="color: #1e3c72; margin-bottom: 8px;">Claudia Quiroga</h3>
+                        </div>
+                        <div style="background: rgba(30, 60, 114, 0.1); padding: 20px; border-radius: 15px; text-align: center;">
+                            <h3 style="color: #1e3c72; margin-bottom: 8px;">Ander Piñeiro Elezkano</h3>
+                        </div>
+                        <div style="background: rgba(30, 60, 114, 0.1); padding: 20px; border-radius: 15px; text-align: center;">
+                            <h3 style="color: #1e3c72; margin-bottom: 8px;">Nacho Losada</h3>
+                        </div>
+                        <div style="background: rgba(30, 60, 114, 0.1); padding: 20px; border-radius: 15px; text-align: center;">
+                            <h3 style="color: #1e3c72; margin-bottom: 8px;">Diego Figueiro</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="categorias" class="tab-content">
+                <div style="padding: 20px 0;">
+                    <div style="font-size: 3rem; color: #1e3c72; margin-bottom: 20px; text-align: center; opacity: 0.8;">🏆</div>
+                    <h2 style="color: #1e3c72; margin-bottom: 25px; text-align: center; font-size: 2rem;">Categorías y Equipos</h2>
+                    <div style="background: rgba(30, 60, 114, 0.05); padding: 30px; border-radius: 15px; border-left: 4px solid #1e3c72;">
+                        <p style="font-size: 1.1rem; line-height: 1.8; color: #555; text-align: justify;">
+                            Primer equipo en <strong>1ª Autonómica</strong>, Juvenil en <strong>1ª Autonómica</strong>, Cadete, dos equipos Infantiles, dos Alevines, un Benjamín y un Prebenjamín, todos ellos en ligas locales.
+                        </p>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 30px;">
+                        <div style="background: linear-gradient(45deg, #1e3c72, #2a5298); color: white; padding: 15px; border-radius: 10px; text-align: center;">
+                            <strong>Senior</strong><br><small>1ª Autonómica</small>
+                        </div>
+                        <div style="background: linear-gradient(45deg, #1e3c72, #2a5298); color: white; padding: 15px; border-radius: 10px; text-align: center;">
+                            <strong>Juvenil</strong><br><small>1ª Autonómica</small>
+                        </div>
+                        <div style="background: rgba(30, 60, 114, 0.8); color: white; padding: 15px; border-radius: 10px; text-align: center;">
+                            <strong>Cadete</strong><br><small>Liga Local</small>
+                        </div>
+                        <div style="background: rgba(30, 60, 114, 0.8); color: white; padding: 15px; border-radius: 10px; text-align: center;">
+                            <strong>Infantiles</strong><br><small>2 Equipos</small>
+                        </div>
+                        <div style="background: rgba(30, 60, 114, 0.8); color: white; padding: 15px; border-radius: 10px; text-align: center;">
+                            <strong>Alevines</strong><br><small>2 Equipos</small>
+                        </div>
+                        <div style="background: rgba(30, 60, 114, 0.8); color: white; padding: 15px; border-radius: 10px; text-align: center;">
+                            <strong>Benjamín</strong><br><small>Liga Local</small>
+                        </div>
+                        <div style="background: rgba(30, 60, 114, 0.8); color: white; padding: 15px; border-radius: 10px; text-align: center;">
+                            <strong>Prebenjamín</strong><br><small>Liga Local</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="calendario" class="tab-content">
+                <div style="padding: 20px 0;">
+                    <div style="font-size: 3rem; color: #1e3c72; margin-bottom: 20px; text-align: center; opacity: 0.8;">📅</div>
+                    <h2 style="color: #1e3c72; margin-bottom: 25px; text-align: center; font-size: 2rem;">Calendario de Entrenamientos</h2>
+                    
+                    <div style="background: linear-gradient(45deg, #1e3c72, #2a5298); color: white; padding: 25px; border-radius: 15px; text-align: center; margin-bottom: 30px;">
+                        <h3 style="margin-bottom: 10px; font-size: 1.4rem;">📍 Horarios Generales</h3>
+                        <p style="font-size: 1.1rem; margin: 0;"><strong>De lunes a viernes de 18:10 a 22:30</strong></p>
+                    </div>
+                    
+                    <div style="display: grid; gap: 20px;">
+                        <div style="background: rgba(30, 60, 114, 0.1); padding: 25px; border-radius: 15px; border-left: 4px solid #2a5298;">
+                            <h3 style="color: #1e3c72; margin-bottom: 15px; display: flex; align-items: center;">
+                                <span style="background: #2a5298; color: white; padding: 5px 10px; border-radius: 20px; font-size: 0.9rem; margin-right: 15px;">18:10 - 19:10</span>
+                                Categorías Base
+                            </h3>
+                            <p style="color: #666; font-size: 1rem; margin: 0;">Prebenjamines • Benjamines • Alevines • Infantiles</p>
+                        </div>
+                        
+                        <div style="background: rgba(30, 60, 114, 0.1); padding: 25px; border-radius: 15px; border-left: 4px solid #2a5298;">
+                            <h3 style="color: #1e3c72; margin-bottom: 15px; display: flex; align-items: center;">
+                                <span style="background: #2a5298; color: white; padding: 5px 10px; border-radius: 20px; font-size: 0.9rem; margin-right: 15px;">19:10 - 20:45</span>
+                                Categorías Juveniles
+                            </h3>
+                            <p style="color: #666; font-size: 1rem; margin: 0;">Cadetes • Juveniles</p>
+                        </div>
+                        
+                        <div style="background: rgba(30, 60, 114, 0.1); padding: 25px; border-radius: 15px; border-left: 4px solid #1e3c72;">
+                            <h3 style="color: #1e3c72; margin-bottom: 15px; display: flex; align-items: center;">
+                                <span style="background: #1e3c72; color: white; padding: 5px 10px; border-radius: 20px; font-size: 0.9rem; margin-right: 15px;">20:30 - 22:30</span>
+                                Primer Equipo
+                            </h3>
+                            <p style="color: #666; font-size: 1rem; margin: 0;">Senior (Lunes, Miércoles y Jueves)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 ADC Fonte do Rei - Todos los derechos reservados</p>
+        </footer>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Ocultar todas las pestañas
+            const allTabs = document.querySelectorAll('.tab-content');
+            allTabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Remover clase active de todos los botones
+            const allButtons = document.querySelectorAll('.tab');
+            allButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Mostrar la pestaña seleccionada
+            document.getElementById(tabName).classList.add('active');
+            
+            // Activar el botón correspondiente
+            event.target.classList.add('active');
+        }
+
+        // Añadir efectos hover a los elementos
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('mouseenter', function() {
+                    if (!this.classList.contains('active')) {
+                        this.style.transform = 'translateY(-2px)';
+                    }
+                });
+                
+                tab.addEventListener('mouseleave', function() {
+                    if (!this.classList.contains('active')) {
+                        this.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
